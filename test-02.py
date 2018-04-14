@@ -4,15 +4,18 @@ from kivy.uix.scatter import Scatter
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
 
-import kivy
-kivy.require('1.0.8')
-
+from kivy.uix.textinput import TextInput
+from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 
+import kivy
 import random
+kivy.require('1.0.8')
+
+
 
 class TutorialApp(App):
     def build(self):
@@ -26,8 +29,6 @@ class TutorialApp(App):
 class ScrollViewApp(App):
 
     def build(self):
-
-
 
         # create a default grid layout with custom width/height
         layout = GridLayout(cols=1, padding=10, spacing=10,
@@ -113,8 +114,34 @@ class ButtonApp(App):
 
         return root
 
+class TextEntryTest(App):
+    def build(self):
+        b = BoxLayout(orientation='vertical')
+        t = TextInput(font_size=75,
+                      size_hint_y=None,
+                      height=200,
+                      text='default')
+
+        f = FloatLayout()
+        s = Scatter()
+        l = Label (text="default",
+                   font_size=75)
+
+        t.bind(text=l.setter('text'))
+
+        f.add_widget(s)
+        f.add_widget(l)
+
+        b.add_widget(t)
+        b.add_widget(f)
+        return b
+
+def some_function(*arg):
+    print ('text Change')
+
 if __name__ == "__main__":
     #TutorialApp().run()
     #randomNumber()
     #ScrollViewApp().run()
-    ButtonApp().run()
+    #ButtonApp().run()
+    TextEntryTest().run()
